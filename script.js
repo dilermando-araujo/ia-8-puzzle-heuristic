@@ -176,7 +176,29 @@ if (goal_node != null) {
         current_node = current_node.parent_node;
     }
 
-    
+    count_steps = 0;
+    let exec_step = () => {
+        render_puzzle(steps[count_steps].matrix);
+
+        count_steps++;
+        if (count_steps == steps.length) return;
+
+        execute_move_animation(
+            [
+                steps[count_steps].parent_move[0] * -1,
+                steps[count_steps].parent_move[1] * -1
+            ],
+            [
+                get_matrix_empty_position(steps[count_steps - 1].matrix)[0] + steps[count_steps].parent_move[0],
+                get_matrix_empty_position(steps[count_steps - 1].matrix)[1] + steps[count_steps].parent_move[1]
+            ], 
+            () => {
+                exec_step();
+            }
+        );
+    }
+
+    exec_step();
 
 } else {
     console.log("NÃO ENCONTRADO");

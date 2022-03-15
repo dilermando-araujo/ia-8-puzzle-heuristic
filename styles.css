@@ -48,22 +48,22 @@
 
 .move-up {
     animation-name: move-up;
-    animation-duration: 1s;
+    animation-duration: 0.75s;
 }
 
 .move-down {
     animation-name: move-down;
-    animation-duration: 1s;
+    animation-duration: 0.75s;
 }
 
 .move-left {
     animation-name: move-left;
-    animation-duration: 1s;
+    animation-duration: 0.75s;
 }
 
 .move-right {
     animation-name: move-right;
-    animation-duration: 1s;
+    animation-duration: 0.75s;
 }
 
 @keyframes move-up {
