@@ -29,4 +29,4 @@ function render_puzzle(matrix) {
     }
 }
 
-render_puzzle(initial_state);
+// render_puzzle(initial_state);

@@ -45,3 +45,67 @@
     margin: 0;
     font-size: 35px;
 }
+
+.move-up {
+    animation-name: move-up;
+    animation-duration: 1s;
+}
+
+.move-down {
+    animation-name: move-down;
+    animation-duration: 1s;
+}
+
+.move-left {
+    animation-name: move-left;
+    animation-duration: 1s;
+}
+
+.move-right {
+    animation-name: move-right;
+    animation-duration: 1s;
+}
+
+@keyframes move-up {
+    from {
+        position: relative;
+        top: 0px;
+    }
+    to {
+        position: relative;
+        top: -72px;
+    }
+}
+
+@keyframes move-down {
+    from {
+        position: relative;
+        top: 0px;
+    }
+    to {
+        position: relative;
+        top: 72px;
+    }
+}
+
+@keyframes move-left {
+    from {
+        position: relative;
+        left: 0px;
+    }
+    to {
+        position: relative;
+        left: -72px;
+    }
+}
+
+@keyframes move-right {
+    from {
+        position: relative;
+        left: 0px;
+    }
+    to {
+        position: relative;
+        left: 72px;
+    }
+}
