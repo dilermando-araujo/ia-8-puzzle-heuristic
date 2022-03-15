@@ -1,0 +1,47 @@
+#puzzle {
+    border: 5px solid black;
+    background-color: #DDDDDD;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    display: flex;
+    flex-direction: column;
+}
+
+.puzzle-row {
+    display: flex;
+}
+
+.tile {
+    width: 70px;
+    height: 70px;
+    background-color: white;
+    border: 0.2px solid #B0B0B0;
+    border-radius: 8px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+}
+
+.tile-selected {
+    background-color: black;
+    color: white;
+}
+
+.tile-empty {
+    width: 72px;
+    height: 72px;
+    background-color: transparent;
+    border: none;
+}
+
+.tile p {
+    margin: 0;
+    font-size: 35px;
+}
