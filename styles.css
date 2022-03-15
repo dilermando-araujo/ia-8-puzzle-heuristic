@@ -1,11 +1,35 @@
-#puzzle {
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#app {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#puzzle-states {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#puzzle-options button {
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.puzzle {
+    margin: 10px;
+
     border: 5px solid black;
     background-color: #DDDDDD;
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     
     display: flex;
     flex-direction: column;

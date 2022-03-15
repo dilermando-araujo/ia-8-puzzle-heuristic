@@ -111,95 +111,100 @@ class NodeTree {
     }
 }
 
-const initial_state = [
-    [2, 8, 3],
-    [1, 6, 4],
-    [7, null, 5]
-];
+function run_puzzle(initial_state, goal_state) {
 
-const goal_state = [
-    [1, 2, 3],
-    [null, 8, 4],
-    [7, 6, 5]
-];
-
-let opened = [NodeTree.root_build(initial_state, goal_state)];
-let closed = [];
-let goal_node = null;
-
-while (opened.length > 0) {
-    const current = opened[0];
-    opened = opened.slice(1);
-
-    if (matrix_equals(current.matrix, current.goal_matrix)) {
-        goal_node = current;
-        break;
-    }
-
-    const children = current.generate_children();
-    for (let i in children) {
-        const opened_position = check_matrix_node_has_generate_in_list(children[i].matrix, opened);
-        const in_opened = opened_position != -1;
-
-        const closed_position = check_matrix_node_has_generate_in_list(children[i].matrix, closed);
-        const in_closed = closed_position != -1;
-
-        if (!in_opened && !in_closed) {
-            opened.push(children[i]);
+    let opened = [NodeTree.root_build(initial_state, goal_state)];
+    let closed = [];
+    let goal_node = null;
+    
+    while (opened.length > 0) {
+        const current = opened[0];
+        opened = opened.slice(1);
+    
+        if (matrix_equals(current.matrix, current.goal_matrix)) {
+            goal_node = current;
+            break;
         }
-
-        if (in_opened) {
-            if (children[i].level < opened[opened_position].level) {
-                opened[opened_position] = children[i];
-            }
-        }
-
-        if (in_closed) {
-            if (children[i].level < closed[closed_position].level) {
-                closed = [...closed.slice(0, closed_position), ...closed.slice(closed_position + 1)];
+    
+        const children = current.generate_children();
+        for (let i in children) {
+            const opened_position = check_matrix_node_has_generate_in_list(children[i].matrix, opened);
+            const in_opened = opened_position != -1;
+    
+            const closed_position = check_matrix_node_has_generate_in_list(children[i].matrix, closed);
+            const in_closed = closed_position != -1;
+    
+            if (!in_opened && !in_closed) {
                 opened.push(children[i]);
             }
-        }
-
-    }
-
-    opened = opened.sort((x, y) => (x.total > y.total) ? 1 : -1);
-    closed.push(current);
-}
-
-if (goal_node != null) {
-
-    let steps = [];
-    let current_node = goal_node;
-    while (current_node != null) {
-        steps = [current_node, ...steps];
-        current_node = current_node.parent_node;
-    }
-
-    count_steps = 0;
-    let exec_step = () => {
-        render_puzzle(steps[count_steps].matrix);
-
-        count_steps++;
-        if (count_steps == steps.length) return;
-
-        execute_move_animation(
-            [
-                steps[count_steps].parent_move[0] * -1,
-                steps[count_steps].parent_move[1] * -1
-            ],
-            [
-                get_matrix_empty_position(steps[count_steps - 1].matrix)[0] + steps[count_steps].parent_move[0],
-                get_matrix_empty_position(steps[count_steps - 1].matrix)[1] + steps[count_steps].parent_move[1]
-            ], 
-            () => {
-                exec_step();
+    
+            if (in_opened) {
+                if (children[i].level < opened[opened_position].level) {
+                    opened[opened_position] = children[i];
+                }
             }
-        );
+    
+            if (in_closed) {
+                if (children[i].level < closed[closed_position].level) {
+                    closed = [...closed.slice(0, closed_position), ...closed.slice(closed_position + 1)];
+                    opened.push(children[i]);
+                }
+            }
+    
+        }
+    
+        opened = opened.sort((x, y) => (x.total > y.total) ? 1 : -1);
+        closed.push(current);
     }
-
-    exec_step();
-
-} else {
-    console.log("NÃO ENCONTRADO");
+    
+    if (goal_node != null) {
+    
+        let steps = [];
+        let current_node = goal_node;
+        while (current_node != null) {
+            steps = [current_node, ...steps];
+            current_node = current_node.parent_node;
+        }
+    
+        count_steps = 0;
+        let exec_step = () => {
+            render_puzzle(steps[count_steps].matrix);
+    
+            count_steps++;
+            if (count_steps == steps.length) return;
+    
+            execute_move_animation(
+                [
+                    steps[count_steps].parent_move[0] * -1,
+                    steps[count_steps].parent_move[1] * -1
+                ],
+                [
+                    get_matrix_empty_position(steps[count_steps - 1].matrix)[0] + steps[count_steps].parent_move[0],
+                    get_matrix_empty_position(steps[count_steps - 1].matrix)[1] + steps[count_steps].parent_move[1]
+                ], 
+                () => {
+                    exec_step();
+                }
+            );
+        }
+    
+        exec_step();
+    
+    } else {
+        console.log("NÃO ENCONTRADO");
+    }
 }
+
+// const initial_state = [
+//     [2, 8, 3],
+//     [1, 6, 4],
+//     [7, null, 5]
+// ];
+
+// const goal_state = [
+//     [1, 2, 3],
+//     [null, 8, 4],
+//     [7, 6, 5]
+// ];
+
+// run_puzzle(initial_state, goal_state);
