@@ -111,7 +111,7 @@ class NodeTree {
     }
 }
 
-function run_puzzle(initial_state, goal_state) {
+function run_puzzle(initial_state, goal_state, onComplete, onNotFound) {
 
     let opened = [NodeTree.root_build(initial_state, goal_state)];
     let closed = [];
@@ -158,7 +158,8 @@ function run_puzzle(initial_state, goal_state) {
     }
     
     if (goal_node != null) {
-    
+        onComplete();
+
         let steps = [];
         let current_node = goal_node;
         while (current_node != null) {
@@ -191,20 +192,6 @@ function run_puzzle(initial_state, goal_state) {
         exec_step();
     
     } else {
-        console.log("NÃO ENCONTRADO");
+        onNotFound();
     }
 }
-
-// const initial_state = [
-//     [2, 8, 3],
-//     [1, 6, 4],
-//     [7, null, 5]
-// ];
-
-// const goal_state = [
-//     [1, 2, 3],
-//     [null, 8, 4],
-//     [7, 6, 5]
-// ];
-
-// run_puzzle(initial_state, goal_state);
